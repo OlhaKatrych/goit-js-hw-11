@@ -80,7 +80,7 @@ function createMarkup({
   </a>
 </li>`;
 
-  const lightbox = new SimpleLightbox('.gallery a', {
+  const lightbox = new SimpleLightbox('.list a', {
     captionsData: 'alt',
     captionDelay: 250,
   });

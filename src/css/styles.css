@@ -21,15 +21,13 @@ p {
   justify-content: center;
   align-items: center;
   gap: 10px;  
-
+  
 }
 
 .list {
-
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  
 }
 
 .gallery-item {
