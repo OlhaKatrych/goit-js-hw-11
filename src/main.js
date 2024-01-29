@@ -1,11 +1,13 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const BASE_URL = 'https://pixabay.com/api';
 const API_KEY = '42087776-9136d7523d21dc11bf8e1a72d';
 
 const form = document.querySelector('.form');
-const input = document.querySelector('input');
 const list = document.querySelector('.list');
 
 form.addEventListener('submit', handleSearch);
@@ -29,7 +31,9 @@ function handleSearch(e) {
           position: 'topRight',
         });
       }
+
       list.innerHTML = markup;
+      lightbox.refresh();
     })
     .catch(err => console.log(err))
     .finally(() => form.reset());
@@ -61,17 +65,25 @@ function createMarkup({
   comments,
   downloads,
 }) {
-  return ` <li class="gallery-item">
+  const markup = ` <li class="gallery-item">
   <a class="gallery-link" href=${webformatURL}>
     <img
       class="gallery-image"
       src=${largeImageURL}
       alt=${tags}
-      <p>${likes}</p>
-      <p>${views}</p>
-      <p>${comments}</p>
-      <p>${downloads}</p>   
-    />
+      >
+
+      <p>Likes<br> ${likes}</p>
+      <p>Views<br> ${views}</p>
+      <p>Comments<br> ${comments}</p>
+      <p>Downloads<br> ${downloads}</p>   
   </a>
 </li>`;
+
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
+
+  return markup;
 }
