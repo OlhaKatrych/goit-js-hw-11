@@ -11,5 +11,5 @@ import{i as l,S as c}from"./assets/vendor-46aac873.js";(function(){const r=docum
       <p>Comments<br> ${t}</p>
       <p>Downloads<br> ${i}</p>   
   </a>
-</li>`;return new c(".gallery a",{captionsData:"alt",captionDelay:250}),a}
+</li>`;return new c(".list a",{captionsData:"alt",captionDelay:250}),a}
 //# sourceMappingURL=commonHelpers.js.map
