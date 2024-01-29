@@ -9,17 +9,25 @@ const API_KEY = '42087776-9136d7523d21dc11bf8e1a72d';
 
 const form = document.querySelector('.form');
 const list = document.querySelector('.list');
+const loader = document.querySelector('.loader');
 
 form.addEventListener('submit', handleSearch);
+loader.classList.remove('loader');
+
+const lightbox = new SimpleLightbox('.list a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 function handleSearch(e) {
   e.preventDefault();
-
   const form = e.currentTarget;
   const query = form.elements.query.value;
+  loader.classList.add('loader');
   searchPhotos(query)
     .then(data => {
       console.log(data);
+
       let markup = '';
       const datas = data.hits;
       for (const item of datas) {
@@ -31,7 +39,6 @@ function handleSearch(e) {
           position: 'topRight',
         });
       }
-
       list.innerHTML = markup;
       lightbox.refresh();
     })
@@ -47,7 +54,6 @@ function searchPhotos(query) {
     orientation: 'horizontal',
     safesearch: true,
   });
-
   return fetch(`${BASE_URL}/?${urlParams}`).then(resp => {
     if (!resp.ok) {
       throw Error(resp.statusText);
@@ -79,11 +85,6 @@ function createMarkup({
       <p>Downloads<br> ${downloads}</p>   
   </a>
 </li>`;
-
-  const lightbox = new SimpleLightbox('.list a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
 
   return markup;
 }
