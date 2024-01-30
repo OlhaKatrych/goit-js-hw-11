@@ -26,8 +26,6 @@ function handleSearch(e) {
   loader.classList.add('loader');
   searchPhotos(query)
     .then(data => {
-      console.log(data);
-
       let markup = '';
       const datas = data.hits;
       for (const item of datas) {
@@ -40,6 +38,7 @@ function handleSearch(e) {
         });
       }
       list.innerHTML = markup;
+      loader.classList.remove('loader');
       lightbox.refresh();
     })
     .catch(err => console.log(err))
@@ -72,10 +71,10 @@ function createMarkup({
   downloads,
 }) {
   const markup = ` <li class="gallery-item">
-  <a class="gallery-link" href=${webformatURL}>
+  <a class="gallery-link" href=${largeImageURL}>
     <img
       class="gallery-image"
-      src=${largeImageURL}
+      src=${webformatURL}
       alt=${tags}
       >
 
